@@ -1,0 +1,7 @@
+node_module
+.vscode
+.DS_Store
+.project
+.settings
+.classpath
+.metadata
