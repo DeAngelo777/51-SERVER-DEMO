@@ -1,106 +1,67 @@
 import express from 'express';
+import { pageContactUs } from './pages/pageContactUs.js';
+import { pageHome } from './pages/pageHome.js';
+import { pageLogin} from './pages/pageLogin.js';
+import { pageRegister } from './pages/pageRegister.js';
+import { pageSecret } from './pages/pageSecret.js';
+import { pageNotFound } from './pages/pageNotFound.js';
+import { pageServices } from './pages/pageServices.js';
+import { pageService } from './pages/pageService.js';
+import { pageServiceNotFound} from './pages/pageServiceNotFound.js';
+import { reqLog } from './middleware/reqLog.js';
 
-const pageName = {
-    firstName: 'Backend',
-    secondName: 'Server'
-}
+import { PageHome } from './pages-oop/PageHome.js';
+import { PageNotFound } from './pages-oop/PageNotFound.js';
+import { LoginPage } from './pages-oop/LoginPage.js';
+import { RegisterPage } from './pages-oop/RegisterPage.js';
+import { Contact } from './pages-oop/contact.js';
+
+
 const app = express();
 const port = 5114;
-// Services
-app.get('/services', (req, res) => {
-    return res.send(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Demo ${pageName.secondName}</title>
-</head>
-<body>
-<p>${pageName.firstName}</p>
-<h1>Services list</h1>
-<nav>
-        <a href="/services/js">JS</a>
-        <a href="/services/html">HTML</a>
-        <a href="/services/css">CSS</a>
-        <a href="/services/git">GIT</a>
 
-</nav>
-    
-</body>
-</html>`)})
+app.use(express.static('public'));
 
+app.use(reqLog)
 // Home page
-app.get('/', (req, res) => {
-    return res.send(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Demo ${pageName.secondName}</title>
-</head>
-<body>
-<p>${pageName.firstName}</p>
-<h1>Home page</h1>
-<nav>
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
+app.get('/', (req, res) => res.send(new PageHome().render()));
+// app.get('/', (req, res) => res.send(pageHome(req)));
+// app.get('/contact', (req, res) => res.send(pageContactUs(req)));
+app.get('/contact', (req, res) => res.send(new Contact().render()));
 
-</nav>
-    
-</body>
-</html>`)})
+// Services page
+app.get('/services', (req, res) => res.send(pageServices(req)));
 
 
+// 1 Service 
 app.get('/services/:name', (req, res) => {
     const services = {
-        html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Demo ${req.params.name}</title>
-</head>
-<body>
-<p>${req.params.name}</p>
-<h1>${req.params.name.toUpperCase()} Page</h1>
-<nav>
-
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
-        <a href="/services/">services</a>
-
-</nav>
-    
-</body>
-</html>`,
+        html: 'Html yra cool',
         css: 'CSS yra grazu',
         js: 'JS tiesiog yra',
         git: 'Git it'
     };
 
     if (services[req.params.name]) {
-        return res.send(services[req.params.name]);
-        
+        return res.send(pageService(req, req.params.name, services[req.params.name]));
     } else {
-        return res.send( req.params.name + ' Paslauga nera teikiama ')
-
+        return res.send(pageServiceNotFound(req, req.params.name));
     }
-    })
+});
     
-app.get('/Login', (req, res) => {
-    return res.send('login page')})
-    
-app.get('/contact', (req, res) => {
-        return res.send('Contact page')})
-    
-app.get('/secret', (req, res) => {
-        return res.status(401).send('Secret page')})
+// app.get('/login', (req, res) => res.send(pageLogin(req)))
+app.get('/login', (req, res) => res.send(new LoginPage().render()))
+// app.get('/register', (req, res) => res.send(pageRegister(req)))
+app.get('/register', (req, res) => res.send(new RegisterPage().render()))
+
+app.get('/secret', (req, res) =>  res.status(401).send(pageSecret(req)))
+// app.get('*', (req, res) =>  res.status(404).send(pageNotFound(req)))
+app.get('*', (req, res) =>  res.status(404).send(new PageNotFound().render()))
+
+
                        
 app.use((req, res, next) => {
-       return  res.status(404).send('404 Not found')
+       return  res.status(404).send("Sorry, can't find that")
     }
 )
 
@@ -108,10 +69,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     return res.status(500).send('Something broke!');
 });
-
-app.get('/random', (req, res) => {
-res.send ('ab?cd')
-})
     
     app.l
 app.listen(port, () => {
