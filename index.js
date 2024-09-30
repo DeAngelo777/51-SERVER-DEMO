@@ -1,15 +1,10 @@
 import express from 'express';
-import { pageSecret } from './pages/pageSecret.js';
-import { pageServices } from './pages/pageServices.js';
-import { pageService } from './pages/pageService.js';
-import { pageServiceNotFound} from './pages/pageServiceNotFound.js';
 import { reqLog } from './middleware/reqLog.js';
-
 import { PageHome } from './pages-oop/PageHome.js';
 import { PageNotFound } from './pages-oop/PageNotFound.js';
 import { LoginPage } from './pages-oop/LoginPage.js';
-import { RegisterPage } from './pages-oop/RegisterPage.js';
-import { Contact } from './pages-oop/contact.js';
+import { RegisterPage } from './pages-oop/PageRegister.js';
+import { Contact } from './pages-oop/Contact.js';
 
 
 const app = express();

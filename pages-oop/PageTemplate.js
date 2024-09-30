@@ -1,10 +1,13 @@
+import { counter } from "../data/AutomaticCounter.js";
+
 export class PageTemplate {
     constructor() {
-        this.projectName = "";
         this.pageTitle = 'Home';
         this.pageCssFileList = [];
         this.pageDefaultCssFileList = ['footer', 'header', 'main'];
         this.pageNewCssFileList = [];
+        this.pageJs = [];
+        this.currentPage = 'home';  // Add currentPage property
     }
 
     head() {
@@ -17,24 +20,25 @@ export class PageTemplate {
             css += `<link rel="stylesheet" href="./css/components/${file}.css" />\n`;
         }
 
-        const title = this.projectName === "" ? this.pageTitle : this.projectName;
 
         return `<head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             ${css}
-            <title>${title}</title>
+            <title>${this.pageTitle}</title>
         </head>`;
     }
 
     header() {
+        const isActive = (page) => this.pageTitle.toLowerCase() === page ? 'active' : '';
+
         return `<header class="main-header">
-            <a href="/"> <img class="logo" src="img/logo.png"></a>
+                <a class="logo" href="/">RaceCars</a>
             <nav>
-                <a href="/">Home</a>
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
-                <a href="/contact">Contact</a>
+                <a class="navLink ${isActive('home')}" href="/">Home</a>
+                <a class="navLink ${isActive('register')}" href="/register">Register</a>
+                <a class="navLink ${isActive('login')}" href="/login">Login</a>
+                <a class="navLink ${isActive('contact')}" href="/contact">Contact</a>
             </nav>
         </header>`;
     }
@@ -47,7 +51,7 @@ export class PageTemplate {
 
     footer() {
         return `<footer class="main-footer">
-            &copy; ${new Date().getFullYear()} Apsilankymu kiekis: 0;
+            <span class="copyright">&copy; Copyright ${new Date().getFullYear()}, Apsilankymu kiekis:</span> ${counter.value}
         </footer>`;
     }
 
@@ -60,6 +64,7 @@ export class PageTemplate {
         }
         return HTML;
     }
+
     render() {
         return `
         <!DOCTYPE html>

@@ -1,2 +1,2 @@
 export const counter = {
-    value: 2,};
+    value: 0};

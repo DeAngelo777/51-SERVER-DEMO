@@ -6,7 +6,7 @@ export class PageHome extends PageTemplate{
 
         this.pageTitle = 'Home';
         this.pageNewCssFileList = ['counter', 'gallery'];
-        this.pageJs  = ['script'];
+        this.pageJs  = ['manualCounter'];
 
     }
 
@@ -32,6 +32,13 @@ export class PageHome extends PageTemplate{
                     <img src="img/car/2.jpg" alt="1">
                     <img src="img/car/3.jpg" alt="1">
                     <img src="img/car/4.jpg" alt="1">
+                    <img src="img/car/5.jpg"  alt="1">
+                    <img src="img/car/6.jpg" alt="1">
+                    <img src="img/car/7.jpg" alt="1">
+                    <img src="img/car/8.jpg" alt="1">
+                    <img src="img/car/9.jpg" alt="1">
+
+                    
 
             </section>
             </main>`;

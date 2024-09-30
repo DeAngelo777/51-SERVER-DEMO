@@ -1,12 +1,10 @@
 import { PageTemplate } from "./PageTemplate.js"
 
-export class LoginPage extends PageTemplate{
+export class RegisterPage extends PageTemplate{
     constructor() {
         super();
-        this.pageTitle = "Login";
+        this.pageTitle = "Register";
         this.pageNewCssFileList = ['counter', 'gallery'];
-
-
 
     }
     
@@ -15,7 +13,7 @@ export class LoginPage extends PageTemplate{
     main() {  return`  
          <main>
             <section>
-                <h1>Login page</h1>
+                <h1>Register page</h1>
 
             </section>
             </main>`;

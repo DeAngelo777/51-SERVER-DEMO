@@ -1,8 +1,7 @@
-import { counter } from "../data/counter.js";
+import { counter } from "../data/AutomaticCounter.js";
 export function reqLog(req, res, next) 
 {
-    console.log('>>>', req.url);
-    console.log('Export middle ware,', Date.now());
+    // console.log('Export middle ware,', Date.now());
 
     counter.value++;
 

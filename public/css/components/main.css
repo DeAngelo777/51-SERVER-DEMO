@@ -1,3 +1,10 @@
+:root {
+  --white: #F9F7F7;
+  --light-blue: #DBE2EF;
+  --normal-blue: #3F72AF;
+  --dark-blue: #112D4E;
+}
+
 body,
 body * {
   margin: 0;
