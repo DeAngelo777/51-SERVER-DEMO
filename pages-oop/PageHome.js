@@ -4,7 +4,10 @@ export class PageHome extends PageTemplate{
     constructor() {
         super();
 
-        this.pageTitle = 'xxx';
+        this.pageTitle = 'Home';
+        this.pageNewCssFileList = ['counter', 'gallery'];
+        this.pageJs  = ['script'];
+
     }
 
 
@@ -14,7 +17,7 @@ export class PageHome extends PageTemplate{
     main() {  return`  
          <main>
             <section>
-                <h1>Home page</h1>
+                <h1>${this.pageTitle}</h1>
 
                 <div class="counter">
                     <button class="firstBtn">-</button>

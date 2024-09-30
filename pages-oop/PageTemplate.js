@@ -1,59 +1,66 @@
 export class PageTemplate {
     constructor() {
-
-
+        this.projectName = "";
+        this.pageTitle = 'Home';
+        this.pageCssFileList = [];
+        this.pageDefaultCssFileList = ['footer', 'header', 'main'];
+        this.pageNewCssFileList = [];
     }
 
-    head() { return `<head>
+    head() {
+        let css = '';
+
+        for (const file of this.pageDefaultCssFileList) {
+            css += `<link rel="stylesheet" href="./css/components/${file}.css" />\n`;
+        }
+        for (const file of this.pageNewCssFileList) {
+            css += `<link rel="stylesheet" href="./css/components/${file}.css" />\n`;
+        }
+
+        const title = this.projectName === "" ? this.pageTitle : this.projectName;
+
+        return `<head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="./css/components/counter.css" />
-            <link rel="stylesheet" href="./css/components/footer.css" />
-            <link rel="stylesheet" href="./css/components/gallery.css" />
-            <link rel="stylesheet" href="./css/components/header.css" />
-            <link rel="stylesheet" href="./css/style.css" />
-            <link rel="stylesheet" href="./css/main.css" />
-
-            <title>${pageTitle}</title>
-          
+            ${css}
+            <title>${title}</title>
         </head>`;
     }
 
     header() {
         return `<header class="main-header">
-        <a href="/"> <img class="logo" src="img/logo.png"></a>
-        <nav>
-        <a href="/">Home</a>
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-        <a href="/contact">Contact</a>
-        </nav>
-
-</header>`;
-
+            <a href="/"> <img class="logo" src="img/logo.png"></a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </header>`;
     }
 
-    main () {
-        return`   <main>
-             <p>Template- please edit</p>
-            </main>`;
-
+    main() {
+        return `<main>
+            <p>Template- please edit</p>
+        </main>`;
     }
 
-    footer () {
-        return`<footer class="main-footer">
-    &copy; ${ new Date().getFullYear()} Apsilankymu kiekis: 0;
-    </footer>`
-
+    footer() {
+        return `<footer class="main-footer">
+            &copy; ${new Date().getFullYear()} Apsilankymu kiekis: 0;
+        </footer>`;
     }
 
-    script () {
-        
-return`<script src="/js/home.js"></script>
-`
+    script() {
+        let HTML = '';
+        if (this.pageJs.length > 0) {
+            for (const file of this.pageJs) {
+                HTML += `<script src="/js/${file}.js"></script>\n            `;
+            }
+        }
+        return HTML;
     }
-
-    render(){
+    render() {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -66,5 +73,4 @@ return`<script src="/js/home.js"></script>
         </body>
         </html>`;
     }
-    
 }
