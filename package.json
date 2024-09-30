@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://deangelo777.github.io/51-SERVER-DEMO/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch ./index.js --port:5114"
+    "build": "node --watch ./index.js --port:5114", 
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
   },
   "author": "Laimonas Dirgelas",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
