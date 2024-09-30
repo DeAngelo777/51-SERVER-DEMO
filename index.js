@@ -1,10 +1,5 @@
 import express from 'express';
-import { pageContactUs } from './pages/pageContactUs.js';
-import { pageHome } from './pages/pageHome.js';
-import { pageLogin} from './pages/pageLogin.js';
-import { pageRegister } from './pages/pageRegister.js';
 import { pageSecret } from './pages/pageSecret.js';
-import { pageNotFound } from './pages/pageNotFound.js';
 import { pageServices } from './pages/pageServices.js';
 import { pageService } from './pages/pageService.js';
 import { pageServiceNotFound} from './pages/pageServiceNotFound.js';
@@ -23,17 +18,10 @@ const port = 5114;
 app.use(express.static('public'));
 
 app.use(reqLog)
-// Home page
+// Pages
 app.get('/', (req, res) => res.send(new PageHome().render()));
-// app.get('/', (req, res) => res.send(pageHome(req)));
-// app.get('/contact', (req, res) => res.send(pageContactUs(req)));
 app.get('/contact', (req, res) => res.send(new Contact().render()));
-
-// Services page
 app.get('/services', (req, res) => res.send(pageServices(req)));
-
-
-// 1 Service 
 app.get('/services/:name', (req, res) => {
     const services = {
         html: 'Html yra cool',
@@ -49,13 +37,9 @@ app.get('/services/:name', (req, res) => {
     }
 });
     
-// app.get('/login', (req, res) => res.send(pageLogin(req)))
 app.get('/login', (req, res) => res.send(new LoginPage().render()))
-// app.get('/register', (req, res) => res.send(pageRegister(req)))
 app.get('/register', (req, res) => res.send(new RegisterPage().render()))
-
 app.get('/secret', (req, res) =>  res.status(401).send(pageSecret(req)))
-// app.get('*', (req, res) =>  res.status(404).send(pageNotFound(req)))
 app.get('*', (req, res) =>  res.status(404).send(new PageNotFound().render()))
 
 

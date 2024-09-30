@@ -1,6 +1,7 @@
 export class PageTemplate {
     constructor() {
 
+
     }
 
     head() { return `<head>
@@ -13,7 +14,7 @@ export class PageTemplate {
             <link rel="stylesheet" href="./css/style.css" />
             <link rel="stylesheet" href="./css/main.css" />
 
-            <title>Server demo</title>
+            <title>${pageTitle}</title>
           
         </head>`;
     }
